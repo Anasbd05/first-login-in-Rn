@@ -54,7 +54,7 @@ export default function Onboard() {
     return (
       <TouchableOpacity
         onPress={() => navigate.replace("/(auth)/Welcome")}
-        style={tw`w-10 h-10 mr-2 justify-center items-center `}
+        style={tw` mr-2 justify-center items-center `}
       >
         <Text style={tw` text-emerald-800 font-bold text-sm `}>Done</Text>
       </TouchableOpacity>
@@ -62,14 +62,14 @@ export default function Onboard() {
   };
   const renderNextButton = () => {
     return (
-      <View style={tw` mr-2 justify-center items-center `}>
+      <View style={tw` mr-2  justify-center items-center `}>
         <Text style={tw` text-emerald-600 font-semibold text-sm `}>Next</Text>
       </View>
     );
   };
   const renderPrevButton = () => {
     return (
-      <View style={tw`w-10 h-10 ml-2 justify-center items-center `}>
+      <View style={tw` ml-2 justify-center items-center `}>
         <Text style={tw` text-emerald-600 font-semibold text-sm`}>Prev</Text>
       </View>
     );
