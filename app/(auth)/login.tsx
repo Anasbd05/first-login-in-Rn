@@ -1,6 +1,6 @@
 import AntDesign from "@expo/vector-icons/AntDesign";
 import Entypo from "@expo/vector-icons/Entypo";
-import { Link } from "expo-router";
+import { Link, router } from "expo-router";
 import React from "react";
 import { Text, TextInput, TouchableOpacity, View } from "react-native";
 import tw from "twrnc";
@@ -38,6 +38,7 @@ const login = () => {
 
       <View style={tw` flex flex-col gap-8 mb-8 w-full `}>
         <TouchableOpacity
+          onPress={() => router.replace("/")}
           style={tw` py-5 w-full shadow-xl shadow-emerald-700 rounded-lg bg-emerald-700`}
         >
           <Text style={tw`font-bold text-center text-white`}>Sign in</Text>
