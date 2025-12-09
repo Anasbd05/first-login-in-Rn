@@ -1,6 +1,6 @@
 import { Link } from "expo-router";
 import React, { useEffect, useState } from "react";
-import { Image, ScrollView, Text, View } from "react-native";
+import { Image, Pressable, ScrollView, Text, View } from "react-native";
 import tw from "twrnc";
 
 interface PokemonT {
@@ -19,16 +19,19 @@ interface PokemonType {
 
 export default function Pokemon() {
   const [pokemons, setPokemons] = useState<PokemonT[]>([]);
+  const [shown, setShown] = useState<number>(20);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     fetchPokemons();
-  }, []);
+  }, [shown]);
 
   async function fetchPokemons() {
     try {
       const response = await fetch(
-        "https://pokeapi.co/api/v2/pokemon/?limit=20"
+        `https://pokeapi.co/api/v2/pokemon/?limit=${shown}`
       );
+      setLoading(true);
       const data = await response.json();
 
       // Fecth details of each pokemon
@@ -47,6 +50,8 @@ export default function Pokemon() {
       setPokemons(detailedPokemons);
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -72,8 +77,10 @@ export default function Pokemon() {
   };
 
   return (
-    <ScrollView contentContainerStyle={tw` p-4 my-10 pb-24 `}>
-      <View style={tw`flex flex-row  flex-wrap gap-5`}>
+    <ScrollView
+      contentContainerStyle={tw` p-4 my-10 pb-24 flex flex-col items-center `}
+    >
+      <View style={tw`flex flex-row  flex-wrap gap-5s  justify-center`}>
         {pokemons.map((pokemon, key) => (
           <Link
             href={{
@@ -92,16 +99,24 @@ export default function Pokemon() {
                 source={{ uri: pokemon.image }}
                 style={{ width: 150, height: 150 }}
               />
-              <Text style={tw`text-2xl font-bold text-center`}>
+              <Text style={tw`text-2xl capitalize font-bold text-center`}>
                 {pokemon.name}
               </Text>
-              <Text style={tw`text-xl text-neutral-800 -mt-1 text-center`}>
+              <Text style={tw`text-xl text-neutral-800 text-sm  text-center`}>
                 {pokemon.types[0].type.name}
               </Text>
             </View>
           </Link>
         ))}
       </View>
+      <Pressable
+        onPress={() => setShown(shown + 6)}
+        style={tw`py-2 w-32 flex items-center justify-center mt-8 rounded-lg text-center  bg-emerald-700  `}
+      >
+        <Text style={tw`text-white font-semibold`}>
+          {loading === true ? "Loading..." : "Show more"}
+        </Text>
+      </Pressable>
     </ScrollView>
   );
 }

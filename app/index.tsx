@@ -1,6 +1,6 @@
 import React, { useState } from "react";
+import Pokemon from "./(tabs)/Pokemon";
 import Onboard from "./Onboard";
-import Pokemon from "./Pokemon";
 
 export default function Index() {
   const [showOnboard, setShowOnboard] = useState(true);
