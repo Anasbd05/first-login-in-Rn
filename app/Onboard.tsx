@@ -33,7 +33,7 @@ export default function Onboard() {
   const renderItem = ({ item }: any) => {
     return (
       <View style={tw` flex-1 items-center justify-center bg-white `}>
-        <Image style={tw` m-20 `} source={item.image} />
+        <Image style={tw` m-16 `} source={item.image} />
         <View>
           <Text style={tw` text-2xl font-bold mx-14 text-black text-center `}>
             {item.title}
@@ -96,8 +96,10 @@ export default function Onboard() {
 const styles = StyleSheet.create({
   dotestyles: {
     backgroundColor: colors.blueFaded,
+    marginBottom: 26,
   },
   Activedotestyles: {
     backgroundColor: colors.blue,
+    marginBottom: 26,
   },
 });
